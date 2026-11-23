@@ -53,3 +53,9 @@ Deployed on Vercel (`vercel deploy --prod`).
 ## License
 
 MIT
+
+## Webhook security
+
+Webhook destinations are validated before connection: hostnames are resolved, private or special-purpose addresses are rejected, and the resolved public addresses are pinned to the HTTP(S) connection through a custom lookup. This prevents DNS rebinding from changing a validated public destination into an internal address during the request. TLS SNI and the HTTP `Host` header continue to use the original webhook hostname.
+
+Webhook requests do not follow redirects, cap response body reads, and use a 5-second timeout across connection and response.
